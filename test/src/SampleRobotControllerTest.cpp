@@ -1,0 +1,171 @@
+﻿// -*- C++ -*-
+/*!
+ * @file  SampleRobotControllerTest.cpp
+ * @brief SampleRobotController
+ * @date $Date$
+ *
+ * $Id$
+ */
+
+#include "SampleRobotControllerTest.h"
+
+// Module specification
+// <rtc-template block="module_spec">
+static const char* samplerobotcontroller_spec[] =
+  {
+    "implementation_id", "SampleRobotControllerTest",
+    "type_name",         "SampleRobotControllerTest",
+    "description",       "SampleRobotController",
+    "version",           "1.0.0",
+    "vendor",            "rsdlab",
+    "category",          "robot controller used to vr componen",
+    "activity_type",     "PERIODIC",
+    "kind",              "DataFlowComponent",
+    "max_instance",      "1",
+    "language",          "C++",
+    "lang_type",         "compile",
+    ""
+  };
+// </rtc-template>
+
+/*!
+ * @brief constructor
+ * @param manager Maneger Object
+ */
+SampleRobotControllerTest::SampleRobotControllerTest(RTC::Manager* manager)
+    // <rtc-template block="initializer">
+  : RTC::DataFlowComponentBase(manager),
+    m_controllerIn("Controller", m_controller),
+    m_hmdIn("Hmd", m_hmd),
+    m_trackerIn("Tracker", m_tracker),
+    m_estimatedPoseOut("estimatedPose", m_estimatedPose)
+
+    // </rtc-template>
+{
+}
+
+/*!
+ * @brief destructor
+ */
+SampleRobotControllerTest::~SampleRobotControllerTest()
+{
+}
+
+
+
+RTC::ReturnCode_t SampleRobotControllerTest::onInitialize()
+{
+  // Registration: InPort/OutPort/Service
+  // <rtc-template block="registration">
+  // Set InPort buffers
+  addInPort("estimatedPose", m_estimatedPoseIn);
+  
+  // Set OutPort buffer
+  addOutPort("Controller", m_controllerOut);
+  addOutPort("Hmd", m_hmdOut);
+  addOutPort("Tracker", m_trackerOut);
+  
+  // Set service provider to Ports
+  
+  // Set service consumers to Ports
+  
+  // Set CORBA Service Ports
+  
+  // </rtc-template>
+
+  // <rtc-template block="bind_config">
+  // </rtc-template>
+  
+  return RTC::RTC_OK;
+}
+
+/*
+RTC::ReturnCode_t SampleRobotControllerTest::onFinalize()
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t SampleRobotControllerTest::onStartup(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t SampleRobotControllerTest::onShutdown(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+
+RTC::ReturnCode_t SampleRobotControllerTest::onActivated(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+
+
+RTC::ReturnCode_t SampleRobotControllerTest::onDeactivated(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+
+
+RTC::ReturnCode_t SampleRobotControllerTest::onExecute(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+
+/*
+RTC::ReturnCode_t SampleRobotControllerTest::onAborting(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t SampleRobotControllerTest::onError(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t SampleRobotControllerTest::onReset(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t SampleRobotControllerTest::onStateUpdate(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+/*
+RTC::ReturnCode_t SampleRobotControllerTest::onRateChanged(RTC::UniqueId ec_id)
+{
+  return RTC::RTC_OK;
+}
+*/
+
+
+
+extern "C"
+{
+ 
+  void SampleRobotControllerTestInit(RTC::Manager* manager)
+  {
+    coil::Properties profile(samplerobotcontroller_spec);
+    manager->registerFactory(profile,
+                             RTC::Create<SampleRobotControllerTest>,
+                             RTC::Delete<SampleRobotControllerTest>);
+  }
+  
+};
+
+
